@@ -1,3 +1,15 @@
+# OpenWrt for CNCD project
+
+## Pre-req
+
+1. VoCore v1 board
+2. WSL or Linux host
+3. Install Rust from official website
+4. Add ``mipsel-unknow-linux-musl`` target using ``rustup`` command
+5. Follow the OpenWrt Build System instructions to build a firwmware using prepared config in this repo.
+
+
+--
   _______                     ________        __
  |       |.-----.-----.-----.|  |  |  |.----.|  |_
  |   -   ||  _  |  -__|     ||  |  |  ||   _||   _|
