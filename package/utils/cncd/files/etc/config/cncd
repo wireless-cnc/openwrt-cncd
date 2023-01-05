@@ -1,4 +1,4 @@
 
 config cncd
-	option serial /dev/ttyS01
+	option serial /dev/ttyS1
 	option port 8081
