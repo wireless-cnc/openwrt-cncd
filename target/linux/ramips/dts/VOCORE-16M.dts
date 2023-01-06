@@ -3,6 +3,17 @@
 #include "VOCORE.dtsi"
 
 / {
+	palmbus@10000000 {
+		uartlite@c00 {
+			status = "okay";
+		};
+		uart@500 {
+			status = "okay";
+		};
+	};
+};
+
+/ {
 	compatible = "vocore,vocore-16m", "vocore,vocore", "ralink,rt5350-soc";
 	model = "VoCore (16M)";
 };
