@@ -159,3 +159,7 @@
 		reg = <0>;
 	};
 };
+
+&uart {
+	status = "okay";
+};

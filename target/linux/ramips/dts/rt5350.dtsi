@@ -28,6 +28,7 @@
 		spi0 = &spi0;
 		spi1 = &spi1;
 		serial0 = &uartlite;
+		serial1 = &uart;
 	};
 
 	palmbus: palmbus@10000000 {
@@ -85,6 +86,22 @@
 
 			interrupt-parent = <&intc>;
 			interrupts = <3>;
+		};
+
+		uartlite: uartlite@c00 {
+			compatible = "ralink,rt5350-uart", "ralink,rt2880-uart", "ns16550a";
+			reg = <0xc00 0x100>;
+
+			resets = <&rstctrl 19>;
+			reset-names = "uartl";
+
+			interrupt-parent = <&intc>;
+			interrupts = <12>;
+
+			pinctrl-names = "default";
+			pinctrl-0 = <&uartlite_pins>;
+
+			reg-shift = <2>;
 		};
 
 		uart: uart@500 {
@@ -207,22 +224,6 @@
 			pinctrl-0 = <&spi_cs1>;
 
 			status = "disabled";
-		};
-
-		uartlite: uartlite@c00 {
-			compatible = "ralink,rt5350-uart", "ralink,rt2880-uart", "ns16550a";
-			reg = <0xc00 0x100>;
-
-			resets = <&rstctrl 19>;
-			reset-names = "uartl";
-
-			interrupt-parent = <&intc>;
-			interrupts = <12>;
-
-			pinctrl-names = "default";
-			pinctrl-0 = <&uartlite_pins>;
-
-			reg-shift = <2>;
 		};
 
 		systick: systick@d00 {
