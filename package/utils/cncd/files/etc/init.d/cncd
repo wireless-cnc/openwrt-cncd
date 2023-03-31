@@ -1,0 +1,55 @@
+#!/bin/sh /etc/rc.common
+
+START=99
+USE_PROCD=1
+PROG=/usr/bin/cncd
+
+
+start_instance() {
+
+	. /lib/functions/network.sh
+
+	local cfg="$1"
+	local serial
+	local port
+	local interface port bind4
+
+	config_get serial "$cfg" 'serial' /dev/ttyS01
+	config_get port "$cfg" 'port' 8080
+
+	network_get_ipaddr bind4 "wwan"
+	
+	[ -n "$bind4" ] || {
+		logger -p daemon.info -t cncd "Deferring start of cncd until host will get an ip"
+		return 1
+	}
+
+	procd_open_instance
+	procd_set_param command $PROG $serial $port
+
+	# Use command logread to see the log
+	procd_set_param stderr 1
+	procd_set_param stdout 1
+	procd_set_param respawn
+	procd_close_instance
+}
+
+stop_instance() {
+	local cfg="$1"
+	# Nothing to do
+}
+
+start_service() {
+	config_load 'cncd'
+	config_foreach start_instance 'cncd'
+}
+
+stop_service() {
+	config_load 'cncd'
+	config_foreach stop_instance 'cncd'
+}
+
+service_triggers()
+{
+	procd_add_reload_interface_trigger "wwan"
+}
