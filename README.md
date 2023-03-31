@@ -1,4 +1,6 @@
-# OpenWrt for CNCD project
+# DEPRECATED - OpenWrt for CNCD project
+
+> Use https://github.com/wireless-cnc/cncd-esp01 instead
 
 ## Pre-req
 
